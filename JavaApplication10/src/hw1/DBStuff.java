@@ -25,10 +25,10 @@ public class DBStuff {
                 + "address varchar(100))";
               
 
-        String sqlProduct = "Create Table Product (prodID integer primary key, "
+        String sqlProduct =  "Create Table Products (ProductID integer primary key, "
                 + "name varchar(100), "
                 + "price integer,"
-                + "desc varchar(100))";
+                + "description varchar(100))";
                 
 
         String sqlSupplier = "Create Table Supplier(supID integer primary key, "
@@ -46,15 +46,15 @@ public class DBStuff {
         String sqlStoreArea = "Create Table StoreArea(storeID integer primary key,"
                 + "storeName varchar(100),"
                 + "dept varchar(100),"
-                + "desc varChar(100))";
+                + "description varChar(100))";
     
                
         
         sendDBCommand(sqlStoreArea);
         
-         String sqlService = "Create Table Service (serviceID integer primary key,"
-                + "name varchar(100),"
-                + "level varchar(100),"
+         String sqlService = "Create Table Services (serviceID integer primary key,"
+                + "servname varchar(100), "
+                + "levels varchar(100), "
                 + "cellphone integer)";
                 sendDBCommand(sqlService);
 
