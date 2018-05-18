@@ -318,6 +318,13 @@ public class StoreSystem1 extends Application
         
         oneStage.show();
         
+        submit.setOnAction (e -> {
+        
+            
+        
+        });
+        
+        
     }
   
   
