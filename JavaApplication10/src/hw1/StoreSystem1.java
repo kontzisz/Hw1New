@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;            
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -86,7 +87,7 @@ public class StoreSystem1 extends Application
         RadioButton custa = new RadioButton ("Customer");
         RadioButton tec = new RadioButton ("Technician");
         RadioButton techn = new RadioButton("Customer");
-            RadioButton cost = new RadioButton("Technician");
+        RadioButton cost = new RadioButton("Technician");
        
        
         Button submit = new Button ("Submit");
@@ -112,7 +113,7 @@ public class StoreSystem1 extends Application
           Label strName = new Label ("Store Center Name: ");
           Label strName1 = new Label ("Store Center Name: ");
           Label strDepartment = new Label ("Service Department: ");
-           Label strDepartment1 = new Label ("Service Department: ");
+          Label strDepartment1 = new Label ("Service Department: ");
           Label strDescription = new Label ("Department Description: ");
           Label strDescription1 = new Label ("Department Description: ");
           Label suppName = new Label ("Supplier Name: ");
@@ -125,6 +126,16 @@ public class StoreSystem1 extends Application
           Label serTown = new Label ("Service Town: ");
           Label serTech = new Label ("Service Technician: ");
           Label serNumber = new Label ("Service Technician's Number: ");
+          
+          
+            TableView<Customer> customerTable;
+            ObservableList<Customer> tableData;
+    
+            TableView<Technician> techTable;
+            ObservableList<Technician> techData;
+    
+            TableView<Store> storeTable;
+            ObservableList<Store> storeData;
            
            
             
@@ -283,23 +294,41 @@ public class StoreSystem1 extends Application
        
      
         onePane.add(submit,3,10);
-        tabPane.add(prsnName1,0, 1);
-        tabPane.add(personName, 1, 1,2,1);
-        
-        tabPane.add(prsnPhone1,0, 2);
-        tabPane.add(personPhone1,1,2);
-        tabPane.add(prsnAddress1, 0,3);
-        tabPane.add(personAddress1,1,3);
-        
- 
-        tabPane.add(prsnType1,0,5);
-        tabPane.add(tec,1,5);
-        tabPane.add(custa,1,6);
-       
-     
-        tabPane.add(submit1,3,10);
+//        tabPane.add(prsnName1,0, 1);
+//        tabPane.add(personName, 1, 1,2,1);
+//        
+//        tabPane.add(prsnPhone1,0, 2);
+//        tabPane.add(personPhone1,1,2);
+//        tabPane.add(prsnAddress1, 0,3);
+//        tabPane.add(personAddress1,1,3);
+//        
+// 
+//        tabPane.add(prsnType1,0,5);
+//        tabPane.add(tec,1,5);
+//        tabPane.add(custa,1,6);
+//       
+//     
+//        tabPane.add(submit1,3,10);
         
         lastTab.add(disp, 0, 1);
+        
+        customerTable = new TableView<>();
+        tableData = FXCollections.observableArrayList();
+        customerTable.setItems(tableData);
+        TableColumn tblcIDNum = new TableColumn("ID Num:");
+        TableColumn tblcName = new TableColumn("Customer Name");
+        TableColumn tblcPhone = new TableColumn("Phone: ");
+        TableColumn tblcAddress = new TableColumn("Address:");
+        
+        tblcIDNum.setCellValueFactory(new PropertyValueFactory<Customer, Double>("IDNum"));
+        tblcName.setCellValueFactory(new PropertyValueFactory<Customer,String>("Name"));
+        tblcPhone.setCellValueFactory(new PropertyValueFactory<Customer,String>("Phone"));
+        tblcAddress.setCellValueFactory(new PropertyValueFactory<Customer,String>("Address"));
+        
+        
+        customerTable.getColumns().addAll(tblcIDNum, tblcName, tblcPhone, tblcAddress);
+        
+        tabPane.add(customerTable,0,0);
         
         tab1.setContent(onePane);
         tbPane.getTabs().add(tab1);
@@ -309,8 +338,12 @@ public class StoreSystem1 extends Application
         
         tab3.setContent(lastTab);
         tbPane.getTabs().add(tab3);
+        
+        
+       
          // Scene
         Scene sceneOne = new Scene (mainPane, 600, 600);
+        customerTable.setMinWidth(sceneOne.getWidth());
         
         // Stage 
         oneStage.setScene(sceneOne);
@@ -424,16 +457,34 @@ public class StoreSystem1 extends Application
         
         threePane.add(submit,3,10); 
      
-        tabPane.add(strName1,0, 1);
-        tabPane.add(storeName1, 1, 1,2,1);
-        
-        tabPane.add(strDepartment1,0, 2);
-        tabPane.add(storeSDepartment1,1,2);
-        tabPane.add(strDescription1, 0,3);
-        tabPane.add(storeDescription1,1,3);
-        tabPane.add(submit1,3,10); 
+//        tabPane.add(strName1,0, 1);
+//        tabPane.add(storeName1, 1, 1,2,1);
+//        
+//        tabPane.add(strDepartment1,0, 2);
+//        tabPane.add(storeSDepartment1,1,2);
+//        tabPane.add(strDescription1, 0,3);
+//        tabPane.add(storeDescription1,1,3);
+//        tabPane.add(submit1,3,10); 
         
         lastTab.add(disp1, 0, 1);
+        
+        storeTable = new TableView<>();
+        storeData = FXCollections.observableArrayList();
+        storeTable.setItems(storeData);
+        TableColumn tblcsID = new TableColumn("Store ID Num:");
+        TableColumn tblcsName = new TableColumn("Store Name:");
+        TableColumn tblcsD = new TableColumn("Store Department:");
+        TableColumn tblcdesc = new TableColumn("Store Description: ");
+        
+        tblcsID.setCellValueFactory(new PropertyValueFactory<Store, Double>("IDNum"));
+        tblcsName.setCellValueFactory(new PropertyValueFactory<Store,String>("Store Name"));
+        tblcsD.setCellValueFactory(new PropertyValueFactory<Store,String>("Store Department"));
+        tblcdesc.setCellValueFactory(new PropertyValueFactory<Store,String>("Store Description"));
+        
+        
+        storeTable.getColumns().addAll(tblcsID, tblcsName, tblcsD, tblcdesc);
+        
+        tabPane.add(storeTable,0,0);
         
         tab4.setContent(threePane);
         tbPane1.getTabs().add(tab4);
@@ -447,6 +498,8 @@ public class StoreSystem1 extends Application
         
          // Scene
         Scene sceneThree = new Scene (mainPane, 600, 600);
+        
+         storeTable.setMinWidth(mainPane.getWidth());
         
         // Stage 
         threeStage.setScene(sceneThree);
@@ -552,18 +605,37 @@ public class StoreSystem1 extends Application
         fivePane.add(prsnAddress, 0,3);
         fivePane.add(personAddress,1,3);
         
-        tabPane.add(prsnNamet,0, 1);
-        tabPane.add(personNamet, 1, 1,2,1);
-        
-        tabPane.add(prsnPhonet,0, 2);
-        tabPane.add(personPhonet,1,2);
-        tabPane.add(prsnAddresst, 0,3);
-        tabPane.add(personAddresst,1,3);
+//        tabPane.add(prsnNamet,0, 1);
+//        tabPane.add(personNamet, 1, 1,2,1);
+//        
+//        tabPane.add(prsnPhonet,0, 2);
+//        tabPane.add(personPhonet,1,2);
+//        tabPane.add(prsnAddresst, 0,3);
+//        tabPane.add(personAddresst,1,3);
         
         
         fivePane.add(submit,3,10);  
-         tabPane.add(submit1,3,10);
+//         tabPane.add(submit1,3,10);
         lastTab.add(disp2, 0, 1);
+        
+        techTable = new TableView<>();
+        techData = FXCollections.observableArrayList();
+        techTable.setItems(techData);
+        TableColumn tblcIDNum = new TableColumn("ID Num:");
+        TableColumn tblcName = new TableColumn("Technician Name");
+        TableColumn tblcPhone = new TableColumn("Phone: ");
+        TableColumn tblcAddress = new TableColumn("Address:");
+        
+        tblcIDNum.setCellValueFactory(new PropertyValueFactory<Technician, Double>("IDNum"));
+        tblcName.setCellValueFactory(new PropertyValueFactory<Technician,String>("Technician Name"));
+        tblcPhone.setCellValueFactory(new PropertyValueFactory<Technician,String>("Phone"));
+        tblcAddress.setCellValueFactory(new PropertyValueFactory<Technician,String>("Address"));
+        
+        
+        techTable.getColumns().addAll(tblcIDNum, tblcName, tblcPhone, tblcAddress);
+        
+        tabPane.add(techTable,0,0);
+        
         
         tab7.setContent(fivePane);
         tbPane2.getTabs().add(tab7);
@@ -575,6 +647,8 @@ public class StoreSystem1 extends Application
         tbPane2.getTabs().add(tab9);
         
         Scene sceneFive = new Scene (mainPane, 600, 600);
+        
+        techTable.setMinWidth(mainPane.getWidth());
         
         // Stage 
         fiveStage.setScene(sceneFive);
